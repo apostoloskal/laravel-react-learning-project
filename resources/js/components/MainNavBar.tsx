@@ -8,7 +8,7 @@ export function MainNavBar() {
 
   return (
     <header className="sticky top-0 z-50 flex items-center justify-between px-4 py-4 
-        bg-amber-200 shadow-sm sm:px-6 lg:px-8 dark:bg-gray-900">
+        bg-amber-200 sm:px-6 lg:px-8 dark:bg-gray-900">
         <a href={homeRoute().url} className="flex items-center gap-2 text-2xl font-extrabold text-gray-900 dark:text-white">
             Ticket<span className="text-amber-600 dark:text-blue-500">Tracker</span>
         </a>

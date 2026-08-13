@@ -1,3 +1,4 @@
+import { MainFooter } from '@/components/MainFooter';
 import { MainNavBar } from '@/components/MainNavBar';
 import { PropsWithChildren } from 'react';
 
@@ -12,9 +13,9 @@ export default function Layout({ children }: PropsWithChildren) {
                 {children}
             </main>
 
-            <footer className="mt-auto p-4 text-center text-gray-500 text-sm">
-                &copy; 2026 My Laravel App
-            </footer>
+            <div className="px-2 py-2.5 bg-amber-200 dark:bg-gray-900 sm:px-4 mt-auto">
+                <MainFooter />
+            </div>
         </div>
     );
 }

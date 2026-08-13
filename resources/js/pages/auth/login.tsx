@@ -26,7 +26,7 @@ export default function Login() {
     return (
         <div className="min-h-[calc(100vh-250px)] flex items-center justify-center px-4 py-12">
             <Head title="Login" />
-            <div className="w-full max-w-md bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
+            <div className="w-full max-w-md bg-orange-100 dark:bg-gray-800 p-6 sm:p-8 rounded-xl shadow-sm border border-amber-400 dark:border-gray-700">
                 <div className="flex flex-col w-full">
                     <div className="flex w-full justify-center">
                         <h1 className="text-2xl text-center font-bold text-gray-900 dark:text-white mb-4">Login</h1>
