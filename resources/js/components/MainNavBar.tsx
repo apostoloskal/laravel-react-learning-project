@@ -1,4 +1,5 @@
 import { create as loginRoute, destroy as logoutRoute } from "@/actions/App/Http/Controllers/Auth/LoginController";
+import { create as createTicketRoute } from "@/actions/App/Http/Controllers/Ticket/TicketController";
 import { home as homeRoute } from "@/routes/index";
 import { usePage } from "@inertiajs/react";
 
@@ -13,7 +14,7 @@ export function MainNavBar() {
             Ticket<span className="text-amber-600 dark:text-blue-500">Tracker</span>
         </a>
         <ul className="hidden list-none items-center gap-8 md:flex">
-            <li><a href="#">Create ticket</a></li>
+            <li><a href={createTicketRoute().url}>Create ticket</a></li>
             <li><a href="#">Search ticket</a></li>
             {user &&
                 <li><a href="#">Dashboard</a></li>
