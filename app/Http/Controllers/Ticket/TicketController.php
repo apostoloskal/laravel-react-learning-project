@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Ticket\StoreTicketRequest;
 use App\Http\Requests\Ticket\UpdateTicketRequest;
 use App\Models\Ticket;
+use Illuminate\Support\Facades\Gate;
 
 class TicketController extends Controller
 {
@@ -23,6 +24,8 @@ class TicketController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create', Ticket::class);
+
         return inertia('ticket/createTicket', ['categories' => TicketCategory::cases()]);
     }
 
@@ -31,7 +34,11 @@ class TicketController extends Controller
      */
     public function store(StoreTicketRequest $request)
     {
-        //
+        Gate::authorize('create', Ticket::class);
+
+        $ticket = Ticket::create($request->validated());
+
+        return redirect()->route('home');
     }
 
     /**

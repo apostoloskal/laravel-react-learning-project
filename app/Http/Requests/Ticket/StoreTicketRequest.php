@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests\Ticket;
 
+use App\Enums\TicketCategory;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreTicketRequest extends FormRequest
 {
@@ -12,7 +14,7 @@ class StoreTicketRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,7 +25,10 @@ class StoreTicketRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => ['required', 'string', 'min:1', 'max:255'],
+            'description' => ['required', 'string', 'min:1', 'max:5000'],
+            'category' => ['required', Rule::enum(TicketCategory::class)],
+            'email' => ['required', 'email'],
         ];
     }
 }
