@@ -1,6 +1,7 @@
 import { create as loginRoute, destroy as logoutRoute } from "@/actions/App/Http/Controllers/Auth/LoginController";
 import { create as createTicketRoute } from "@/actions/App/Http/Controllers/Ticket/TicketController";
 import { home as homeRoute } from "@/routes/index";
+import { track as trackTicketRoute } from "@/routes/ticket"
 import { usePage } from "@inertiajs/react";
 
 export function MainNavBar() {
@@ -15,7 +16,7 @@ export function MainNavBar() {
         </a>
         <ul className="hidden list-none items-center gap-8 md:flex">
             <li><a href={createTicketRoute().url}>Create ticket</a></li>
-            <li><a href="#">Search ticket</a></li>
+            <li><a href={trackTicketRoute().url}>Search ticket</a></li>
             {user &&
                 <li><a href="#">Dashboard</a></li>
             }
@@ -27,8 +28,8 @@ export function MainNavBar() {
                 </span>
                 <form method="POST" action={logoutRoute().url} className="inline">
                     <button type="submit" className="flex items-center w-full px-4 py-2.5 text-sm font-medium text-red-600 transition-colors duration-200 rounded-lg hover:bg-red-50 dark:text-red-400 dark:hover:bg-gray-800 cursor-pointer">
-                        <svg className="w-5 h-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                        <svg className="w-5 h-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                         </svg>
                         Log Out
                     </button>

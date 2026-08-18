@@ -26,7 +26,7 @@ class TicketController extends Controller
     {
         Gate::authorize('create', Ticket::class);
 
-        return inertia('ticket/createTicket', ['categories' => TicketCategory::cases()]);
+        return inertia('ticket/create', ['categories' => TicketCategory::cases()]);
     }
 
     /**

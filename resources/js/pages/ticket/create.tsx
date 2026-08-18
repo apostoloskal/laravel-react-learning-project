@@ -1,5 +1,4 @@
-import { router, usePage } from "@inertiajs/react";
-import { useState } from "react";
+import { useForm, usePage } from "@inertiajs/react";
 
 import { store as submitTicketRoute } from "@/actions/App/Http/Controllers/Ticket/TicketController";
 
@@ -8,27 +7,18 @@ interface CreateTicketProps {
 }
 
 export default function CreateTicket({ categories }: CreateTicketProps) {
-    const { errors } = usePage().props;
+    const { globalErrors } = usePage().props;
 
-    const [values, setValues] = useState({
+    const { data, setData, post, errors } = useForm({
         title: "",
         description: "",
         category: "",
         email: "",
-    });
-
+    })
     const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
         e.preventDefault();
-        router.post(submitTicketRoute().url, values);
+        post(submitTicketRoute().url);
     }
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        const { name, value } = e.target;
-        setValues((prevValues) => ({
-            ...prevValues,
-            [name]: value,
-        }));
-    };
 
     return (
         <div className="mt-2 max-w-3xl mx-auto p-6 bg-orange-200 dark:bg-gray-800 
@@ -39,7 +29,7 @@ export default function CreateTicket({ categories }: CreateTicketProps) {
                     Please describe your issue in detail. Our team typically responds within 24 hours.
                 </p>
             </div>
-            <form method="POST" onSubmit={handleSubmit} encType="multipart/form-data" className="space-y-6">
+            <form method="POST" onSubmit={handleSubmit} autoComplete="off" encType="multipart/form-data" className="space-y-6">
                 <div>
                     <label htmlFor="title" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                         Title <span className="text-red-500">*</span>
@@ -48,7 +38,7 @@ export default function CreateTicket({ categories }: CreateTicketProps) {
                         type="text" 
                         name="title" 
                         id="title" 
-                        value={values.title}
+                        value={data.title}
                         required
                         autoFocus
                         placeholder="Brief summary of the issue"
@@ -56,7 +46,7 @@ export default function CreateTicket({ categories }: CreateTicketProps) {
                         bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 
                         focus:ring-indigo-500 focus:border-indigo-500 shadow-sm focus:outline-none 
                         focus:ring-2 transition-colors duration-200"
-                        onChange={handleChange}
+                        onChange={(e) => setData('title', e.target.value)}
                     />
                     { errors.title && <p className="text-red-500 text-sm mt-1">{errors.title}</p> }
                 </div>
@@ -69,14 +59,14 @@ export default function CreateTicket({ categories }: CreateTicketProps) {
                         name="description" 
                         id="description" 
                         rows={6}
-                        value={values.description}
+                        value={data.description}
                         required
                         placeholder="Provide as much detail as possible, including steps to reproduce any errors..."
                         className="w-full rounded-lg px-3 py-2 text-gray-900 dark:text-white 
                         bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 
                         focus:ring-indigo-500 focus:border-indigo-500 shadow-sm focus:outline-none 
                         focus:ring-2 transition-colors duration-200"
-                        onChange={handleChange}
+                        onChange={(e) => setData('description', e.target.value)}
                     />
                     { errors.description && <p className="text-red-500 text-sm mt-1">{errors.description}</p> }
                 </div>
@@ -88,9 +78,9 @@ export default function CreateTicket({ categories }: CreateTicketProps) {
                     <select 
                         name="category" 
                         id="category" 
-                        value={values.category}
+                        value={data.category}
                         required
-                        onChange={handleChange}
+                        onChange={(e) => setData('category', e.target.value)}
                         className="w-full rounded-lg px-3 py-2 text-gray-900 dark:text-white 
                         bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 
                         focus:ring-indigo-500 focus:border-indigo-500 shadow-sm focus:outline-none 
@@ -117,10 +107,10 @@ export default function CreateTicket({ categories }: CreateTicketProps) {
                         type="email" 
                         name="email" 
                         id="email" 
-                        value={values.email}
+                        value={data.email}
                         required
                         placeholder="you@example.com"
-                        onChange={handleChange}
+                        onChange={(e) => setData('email', e.target.value)}
                         className="w-full rounded-lg px-3 py-2 text-gray-900 dark:text-white bg-white 
                         dark:bg-gray-900 border border-gray-300 dark:border-gray-600 focus:ring-indigo-500 
                         focus:border-indigo-500 shadow-sm focus:outline-none focus:ring-2 transition-colors duration-200"
